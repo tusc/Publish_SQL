@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 # Publish_DBCC_byvm.ps1
 DBCC check using Veeam's SQL Publish feature v1.1
-By Carlos Talbot (carlos.talbot@veeam.com)
+By Carlos Talbot (carlos@talbot.net)
 
 This script should run on the SQL server the databases are attached to
 You will need to install the Veeam console on the SQL server in order to enable the Veeam PowerShell cmdlets
