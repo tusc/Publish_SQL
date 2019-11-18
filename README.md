@@ -18,7 +18,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 DBCC check using Veeam's SQL Publish feature v1.1
 By Carlos Talbot (carlos@talbot.net)
 
-This script should run on the SQL server the databases are attached to
-You will need to install the Veeam console on the SQL server in order to enable the Veeam PowerShell cmdlets
+This script should run on the SQL server the databases are attached to.
+You will need to install the Veeam console on the SQL server in order to enable the Veeam PowerShell cmdlets.
 
-Name of SQL Server and instance that'll be used to attached the published backup images and where the DBCC check will run.
+The script can optionally send a summary email with the results for each DBCC check.
