@@ -1,18 +1,18 @@
-﻿# DBCC check using Veeam's SQL Publish feature v1.1
-# By Carlos Talbot (carlos@talbot.net)
+# DBCC check using Veeam's SQL Publish feature v1.1
+# By Carlos Talbot (carlos.talbot@veeam.com)
 #
-# This script should run on the SQL server the databases will be attached to.
-# You will need to install the Veeam console on the SQL server in order to enable the Veeam PowerShell cmdlets.
+# This script should run on the SQL server the databases are attached to
+# You will need to install the Veeam console on the SQL server in order to enable the Veeam PowerShell cmdlets
 #
 # Name of SQL Server and instance that'll be used to attached the published backup images and where the DBCC check will run.
 $SQL_Server_Name = "SQL2017"
 $SQL_Instance_Name = "VEEAMBR"
-$VBRSERVER = "192.168.1.50"
+$VBRSERVER = "192.168.1.192"
 #Set this to true to send an email at the end of the script
 $Send_Email = $true
 $Email_Acct = "sender@gmail.com"
-$Email_Pass = "XXXXXXXXXXXXXX"
-$Email_Rcpt = "receiver@company.com"
+$Email_Pass = "XXXXXXXXXX"
+$Email_RCPT = "receiver@veeam.com"
 # Uncomment the following two lines if you plan to use SQL Credentials for publishing the database to the running SQL Instance
 # The default is to use Windows passthrough authentication
 #$sqlcreds = Get-Credential
@@ -40,7 +40,7 @@ function Send-Email
 
     $credentials = new-object Management.Automation.PSCredential $Email_Acct, ($Email_PASS | ConvertTo-SecureString -AsPlainText -Force)
     $From = $Email_Acct
-    $To = $Email_Rcpt
+    $To = $Email_RCPT
     
     if ($errors_found) {
         $Subject = "Results from SQL DBCC run - DBCC ERRORS found"
@@ -129,7 +129,7 @@ foreach($VM in $VMs) {
                 $email += "     $db_tempname -  DBCC ERRORS!" + " `n" + $ret + " `n"
                 $errors_found = $true
             }
-            Unpublish-VESQLDatabase -Database $database
+            Unpublish-VESQLDatabase -Database $database -Confirm:$false
         }
         Stop-VESQLRestoreSession -Session $session
     }
